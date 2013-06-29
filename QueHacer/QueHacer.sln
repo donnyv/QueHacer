@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueHacer", "QueHacer\QueHac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueHacer.Tests", "QueHacer.Tests\QueHacer.Tests.csproj", "{ACA9645B-250A-424C-9DA6-A6B94506C0D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueHacer.Core", "QueHacer.Core\QueHacer.Core.csproj", "{99AAFE2F-037B-4B6B-A12E-C5E10548077A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{ACA9645B-250A-424C-9DA6-A6B94506C0D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACA9645B-250A-424C-9DA6-A6B94506C0D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACA9645B-250A-424C-9DA6-A6B94506C0D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99AAFE2F-037B-4B6B-A12E-C5E10548077A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99AAFE2F-037B-4B6B-A12E-C5E10548077A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99AAFE2F-037B-4B6B-A12E-C5E10548077A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99AAFE2F-037B-4B6B-A12E-C5E10548077A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
