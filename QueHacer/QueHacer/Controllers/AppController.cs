@@ -10,27 +10,34 @@ namespace QueHacer.Controllers
 {
     public class AppController : Controller
     {
-        
-        // GET: /App/
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        public JavaScriptResult TodoDB(string id)
+        public JavaScriptResult TodoDB()
         {
             return (new JavaScriptResult() { Script = AppLogic.GetTodoDBjson() });
-        } 
+        }
+
+        [HttpGet]
+        public ContentResult Task(string id)
+        {
+            return JsonUtilities.Result(false).JsonContentResult; 
+        }
 
         [HttpPost]
         public ContentResult AddTask()
         {
-            object ret = null;
-            var ErrorMsg = string.Empty;
-            if (ret == null)
-                return JsonUtilities.Result(true, ErrorMsg).JsonContentResult;
-            else
-                return JsonUtilities.Result(ret).JsonContentResult; 
+            return JsonUtilities.Result(false).JsonContentResult;  
+        }
+
+        [HttpPost]
+        public ContentResult DeleteTask()
+        {
+            return JsonUtilities.Result(false).JsonContentResult;
+        }
+
+        [HttpPost]
+        public ContentResult UpdateTask()
+        {
+            return JsonUtilities.Result(false).JsonContentResult;
         }
     }
 }

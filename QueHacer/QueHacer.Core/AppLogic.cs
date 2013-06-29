@@ -8,9 +8,9 @@ namespace QueHacer.Core
 {
     public class AppLogic
     {
-        public static Tuple<bool, string> AddTask()
+        public static Tuple<bool, string, dynamic> AddTask()
         {
-            return new Tuple<bool, string>(true, "success");
+            return new Tuple<bool, string, dynamic>(true, "success", new object());
         }
 
         public static string GetTodoDBjson()
