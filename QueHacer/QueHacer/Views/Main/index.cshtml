@@ -8,10 +8,43 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Que Hacer!</title>
+    <link rel="stylesheet" type="text/css" href="Content/css/main.css"> 
+    <!--[if IE]> <link type="text/css" rel="stylesheet" href="Content/css/main_IEonly.css" /> <![endif]-->
 </head>
 <body>
-    <div>
-        Que Hacer!
+    <div id="main" class="CenterContent">
+        <h2>Que Hacer!</h2>
+        <div id="TopBar">
+            <button class="greenBtn">Add a New Task</button>
+        </div>
+        <div>
+            <div id="Menu">
+
+            </div>
+            <div id="TasksContainer">
+
+            </div>
+        </div>
+        <button id="AddTask">Add Task</button>
     </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="Content/js/main.js"></script>
+    <script src="Content/js/main.js"></script>
+    <script type="text/javascript">
+        $("#AddTask").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/App/AddTask/",
+                dataType: "json",
+                //data: JSON.stringify(packet),
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                cache: false,
+                success: function (result) {
+                    callback(result.status);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

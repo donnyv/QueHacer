@@ -25,6 +25,7 @@ namespace QueHacer.Controllers
         [HttpPost]
         public ContentResult AddTask()
         {
+            AppLogic.AddTask();
             return JsonUtilities.Result(false).JsonContentResult;  
         }
 
