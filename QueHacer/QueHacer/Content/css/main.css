@@ -1,4 +1,5 @@
-﻿body
+﻿/* Elments */
+body
 {
 	font-family:Segoe UI;
 	text-rendering: optimizeLegibility;
@@ -6,17 +7,28 @@
 	padding:0;
 	background-repeat: no-repeat;
 	background: #d7dee3; /*d7dee3*/ /* old browsers */
+    background: -ms-linear-gradient(top, #FFFFFF 0%, #e5ebee 33%, #d7dee3 48%, #FFFFFF 100%) fixed;
 	background: -moz-linear-gradient(top, #FFFFFF 0%, #e5ebee 33%, #d7dee3 48%, #FFFFFF 100%) fixed; 
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(48%,#d7dee3), color-stop(33%,#e5ebee)) fixed;
 	background: -o-linear-gradient(top, #FFFFFF 0%,#d7dee3 48%,#e5ebee 100%) fixed;
 	-webkit-font-smoothing: antialiased;
 }
+h1 {
+    margin:0;
+}
+
+/* Reusable Classes */
 .CenterContent{
 	display: table-cell;
 	vertical-align: middle;
 	display: block;
 	margin: 1em auto;
 	margin-top:0px;
+}
+.BoxGlow_Grey{
+  	box-shadow: 0 0 5px rgba(176,176,176, 1);
+    -webkit-box-shadow: 0 0 5px rgba(176,176,176, 1); 
+    -moz-box-shadow: 0 0 5px rgba(176,176,176, 1);
 }
 .greenBtn {
 	-moz-box-shadow: 0px 1px 0px 0px #d9fbbe;
@@ -47,8 +59,12 @@
 	top:1px;
 }
 
+ /* Specific Classes */
+#TopBar {
+    margin: 5px 0px 5px 0px;
+} 
 #main {
-    width:800px;
+    width:900px;
 }
 #Menu {
     float:left;
@@ -83,7 +99,8 @@
  position: relative;
 }
 #TasksContainer {
+    float:left;
     width: 750px;
     height: 500px;
-    float: left;
+    background-color:#ffffff;
 }
