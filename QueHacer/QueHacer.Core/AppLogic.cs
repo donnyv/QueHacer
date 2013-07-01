@@ -36,7 +36,8 @@ namespace QueHacer.Core
 
         public static string GetTodoDBjson()
         {
-            return string.Empty;
+            var db = "var todoDB = [];";
+            return db;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace QueHacer.Controllers
         // GET: /View/
         public ActionResult Index()
         {
+            
             return View();
         }
     }
