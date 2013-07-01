@@ -59,6 +59,43 @@ h1 {
 	top:1px;
 }
 
+.greenBtn2 {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809) );
+	background:-moz-linear-gradient( center top, #89c403 5%, #77a809 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809');
+	background-color:#89c403;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #74b807;
+	display:inline-block;
+	color:#ffffff;
+	font-size:10px;
+	font-weight:bold;
+	padding:3px 18px;
+	text-decoration:none;
+}.greenBtn2:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77a809), color-stop(1, #89c403) );
+	background:-moz-linear-gradient( center top, #77a809 5%, #89c403 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403');
+	background-color:#77a809;
+}.greenBtn2:active {
+	position:relative;
+	top:1px;
+}
+.greenBtn2 {
+    visibility:hidden;
+}
+.fakeURL
+{
+	cursor:pointer;
+	text-decoration: underline;
+	color:#2E6D92;
+}
+.fakeURL:hover 
+{
+	text-decoration:none; 
+}
  /* Specific Classes */
 #TopBar {
     margin: 5px 0px 5px 0px;
@@ -66,41 +103,86 @@ h1 {
 #main {
     width:900px;
 }
+#FilterTask {
+    float:right;
+    margin-top: 15px;
+}
 #Menu {
     float:left;
     width: 105px;
     font-size: 12pt;
 }
-#Menu ul {
-    list-style-type: none;
-    margin:0;
-    padding:0;
-    background:#666; 
-}
-#Menu li {
-    padding: 5px;
-}
-#Menu li a {
-    color: #fff;
-    cursor: pointer;
-    display:block;
-    height:25px;
-    line-height: 25px;
-    text-indent: 10px;
-    text-decoration:none;
-    width:100%;
-} 
-#Menu a:hover{
- text-decoration:underline;
-}
+    #Menu ul {
+        list-style-type: none;
+        margin:0;
+        padding:0;
+        background:#666; 
+    }
+    #Menu li {
+        padding: 5px;
+    }
+    #Menu li a {
+        color: #fff;
+        cursor: pointer;
+        display:block;
+        height:25px;
+        line-height: 25px;
+        text-indent: 10px;
+        text-decoration:none;
+        width:100%;
+    } 
+    #Menu a:hover{
+     text-decoration:underline;
+    }
  
-#Menu li:hover {
- background: #f90;
- position: relative;
-}
+    #Menu li:hover {
+     background: #f90;
+     position: relative;
+    }
 #TasksContainer {
     float:left;
-    width: 750px;
+    width: 795px;
     height: 500px;
     background-color:#ffffff;
+    overflow:auto;
 }
+    #TasksContainer table {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+        font-size: 12px;
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+        margin:0;
+    }
+    #TasksContainer table td {
+        background: #e8edff;
+        border-bottom: 1px solid #fff;
+        color: #669;
+        border-top: 1px solid transparent;
+        padding: 5px;
+    }
+    #TasksContainer table p {
+        margin:0;
+    }
+    #TasksContainer table tr:hover td {
+        background: #d0dafd;
+        color: #339;
+        cursor:pointer;
+    }
+    #TasksContainer table tr td:first-child {
+        font-size:14pt;
+        font-family: sans-serif;
+        background-color: #F7977A;
+        color: #fff;
+        text-align:center;
+        width:20px;
+    }
+    #TasksContainer table td:nth-child(2) {
+
+    }
+    #TasksContainer table td:nth-child(3) {
+        width:75px;
+    }
+    #TasksContainer table td:nth-child(4) {
+        width:70px;
+    }
