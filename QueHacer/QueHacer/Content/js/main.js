@@ -30,15 +30,16 @@
         var taskItem = {
             _id: new ObjectId().toString(),
             task: $.trim($("#ntTaskDesc").val()),
-            duedate: $("#ntDueDate").attr("data-duedate"),
+            duedate: $("#ntDueDate").attr("data-duedate") ? 0 : 1,
             category: $.trim($("#ntCategory").val())
         };
 
         if (taskItem.task == "")
             return;
 
-        AddTask(task, function (result) {
-            
+        AddTask(taskItem, function (result) {
+            ResetDialog();
+            CloseDialog();
         });
     });
 
@@ -46,10 +47,16 @@
 
     });
 
-    $("#ntClose").on("click", function () {
+    $("#ntClose").on("click", CloseDialog);
+
+    // methods
+    function ResetDialog() {
+
+    }
+    function CloseDialog() {
         $("#Overlay").fadeOut(200);
         $("#NewTask").hide("drop", { direction: "up" }, 300);
-    });
+    }
 
     // actions
     function AddTask(NewTask, callback) {
