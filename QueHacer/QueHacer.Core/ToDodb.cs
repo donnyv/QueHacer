@@ -14,6 +14,7 @@ namespace QueHacer.Core
             public string task { get; set; }
             public double duedate { get; set; }
             public string category { get; set; }
+            public string status { get; set; }
         }
     }
 }

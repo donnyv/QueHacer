@@ -23,6 +23,14 @@ $().ready(function () {
             $("#NewTask").show("drop", { direction: "up" }, 400);
         });
 
+        $(".DeleteTask").on("click", function () {
+            var row = $(this).parents("tr");
+            var id = row.attr("data-taskid");
+            app.Tasks.Delete(id, function (result) {
+                
+            });
+        });
+
         $("#ntDueDate").on("click", function () {
             $("#datepicker").show().datepicker({
                 onSelect: function (date) {
@@ -37,32 +45,35 @@ $().ready(function () {
             ResetDueDate();
         });
 
-        $("#ntSaveClose").on("click", function () {
-            dueDate = $("#ntDueDate").attr("data-duedate") != "" ? app.Util.DatetoUTC(new Date($("#ntDueDate").attr("data-duedate"))) : 0;
-
-            var taskItem = {
-                _id: new ObjectId().toString(),
-                task: $.trim($("#ntTaskDesc").val()),
-                duedate: dueDate,
-                category: $.trim($("#ntCategory").val())
-            };
-
-            if (taskItem.task == "")
-                return;
-
-            app.Tasks.add(taskItem, function (result) {
-                CloseDialog();
-            });
-        });
+        $("#ntSaveClose").on("click", SaveTask);
 
         $("#ntSaveAnother").on("click", function () {
-
+            SaveTask(true);
+            ResetDialog();
         });
 
         $("#ntClose").on("click", CloseDialog);
     });
 
     // methods
+    function SaveTask(NotCloseWhenDone) {
+        dueDate = $("#ntDueDate").attr("data-duedate") != "" ? app.Util.DatetoUTC(new Date($("#ntDueDate").attr("data-duedate"))) : 0;
+
+        var taskItem = {
+            _id: new ObjectId().toString(),
+            task: $.trim($("#ntTaskDesc").val()),
+            duedate: dueDate,
+            category: $.trim($("#ntCategory").val())
+        };
+
+        if (taskItem.task == "")
+            return;
+
+        app.Tasks.add(taskItem, function (result) {
+            if (!NotCloseWhenDone)
+                CloseDialog();
+        });
+    }
     function ResetDueDate() {
         $("#ntDueDateLabel,#ntRemoveDate").hide();
         $("#ntDueDate").html(duedateText).attr("data-duedate", "");

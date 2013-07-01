@@ -34,9 +34,19 @@ namespace QueHacer.Core
             }
         }
 
-        public static Tuple<bool, string, dynamic> DeleteTask()
+        public static Tuple<bool, string, dynamic> DeleteTask(string id)
         {
-            return new Tuple<bool, string, dynamic>(true, "success", new object());
+            try
+            {
+                var db = new enosql.EnosqlDatabase(dbasePath);
+                db.GetCollection("Tasks").Remove(id);
+                return new Tuple<bool, string, dynamic>(false, "success", new object());
+            }
+            catch (Exception ex)
+            {
+                Logging.Log(ex, DefaultValues);
+                return new Tuple<bool, string, dynamic>(true, "Could not delete task!", new object());
+            }
         }
 
         public static Tuple<bool, string, dynamic> UpdateTask()

@@ -15,7 +15,7 @@
         var cat = $.trim(o.category) == '' ? '' : o.category[0].toUpperCase();
         var duedate = o.duedate == 0 ? "" : app.Util.UTCtoDate(o.duedate);
         %>
-        <tr>
+        <tr data-taskid="<%= o._id %>">
             <td title="<%= o.category %>" style="background-color:#<%= colors[cat] %>;"><%=cat %></td>
             <td><p><%- o.task %></p></td>
             <td>

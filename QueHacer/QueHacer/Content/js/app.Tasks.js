@@ -33,7 +33,7 @@
     }
     function DeleteTaskPOST(id, callback) {
         var errorMsg = "Missing a parameter!";
-        if (NewTask == null) { throw errorMsg; return; }
+        if (id == null) { throw errorMsg; return; }
         if (callback == null) { throw errorMsg; return; }
 
         var packet = {
@@ -62,7 +62,9 @@
             } else {
                 TaskContainer.empty().append(tasks.tl.TasksList({ rows: tasks.tl.Tasks(todoDB.Tasks) }));
             }
-            callback();
+
+            if(callback)
+                callback();
         });
     }
 
@@ -73,12 +75,30 @@
                     todoDB.Tasks.push(item);
                     RenderTasks();
                 }
-
                 callback(result);
             });
         },
-        Delete: function (item) {
+        Delete: function (id, callback) {
+            DeleteTaskPOST(id, function (result) {
+                if (!result.IsError) {
+                    var idToDelete;
+                    for (var i = 0, l = todoDB.Tasks.length; i < l; i++) {
+                        if (todoDB.Tasks[i]._id == id) {
+                            idToDelete = id
+                            todoDB.Tasks.splice(i, 1);
+                            break;
+                        }
+                    }
 
+                    // fade row
+                    $("tr [data-taskid='" + idToDelete + "']").fadeOut(300, function () {
+                        $(this).remove();
+                        RenderTasks();
+                    });
+
+                }
+                callback(result);
+            });
         },
         filterByTime: function () {
 
