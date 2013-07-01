@@ -103,6 +103,7 @@ h1 {
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
 	border-radius:6px;
+    border:1px solid #83c41a;
 	display:inline-block;
 	color:#ffffff;
 	font-family:arial;
@@ -130,6 +131,7 @@ h1 {
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
 	border-radius:6px;
+    border:1px solid #337fed;
 	display:inline-block;
 	color:#ffffff;
 	font-family:arial;
@@ -146,7 +148,7 @@ h1 {
 	position:relative;
 	top:1px;
 }
- .redBtn3 {
+.redBtn3 {
 	-moz-box-shadow:inset 0px 1px 0px 0px #fab3ad;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #fab3ad;
 	box-shadow:inset 0px 1px 0px 0px #fab3ad;
@@ -157,6 +159,7 @@ h1 {
 	-moz-border-radius:6px;
 	-webkit-border-radius:6px;
 	border-radius:6px;
+	border:1px solid #d83526;
 	display:inline-block;
 	color:#ffffff;
 	font-family:arial;
@@ -182,6 +185,41 @@ h1 {
 .fakeURL:hover 
 {
 	text-decoration:none; 
+}
+input.GlowTextbox {
+    outline:none;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border:1px solid rgba(0,0,0, 0.2);
+}
+
+input.GlowTextbox:focus {
+    box-shadow: 0 0 5px rgba(30, 87, 153, 1);
+    -webkit-box-shadow: 0 0 5px rgba(30, 87, 153, 1); 
+    -moz-box-shadow: 0 0 5px rgba(30, 87, 153, 1);
+    border:1px solid rgba(30, 87, 153, 0.8); 
+}
+textarea.GlowTextbox {
+    outline:none;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    border-radius:3px;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border:1px solid rgba(0,0,0, 0.2);
+}
+textarea.GlowTextbox:focus {
+    box-shadow: 0 0 5px rgba(30, 87, 153, 1);
+    -webkit-box-shadow: 0 0 5px rgba(30, 87, 153, 1); 
+    -moz-box-shadow: 0 0 5px rgba(30, 87, 153, 1);
+    border:1px solid rgba(30, 87, 153, 0.8); 
 }
  /* Specific Classes */
 #TopBar {
@@ -292,10 +330,26 @@ h1 {
 #DueDate {
 
 }
+#ntCategoryContainer {
+
+}
+#ntCategory {
+    padding:5px;
+    float:right;
+}
 #ntTaskDesc {
     width: 445px;
     height: 293px;
     border:0;
     padding:5px;
     resize: none;
+}
+#ntContent {
+    height:340px;
+}
+#ntBottom {
+    width: 100%;
+    text-align: right;
+    padding-top: 5px;
+    border-top: 1px #ccc solid;
 }
