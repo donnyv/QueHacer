@@ -180,7 +180,10 @@
     <Content Include="Content\js\jquery.watermark.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\ObjectId.js" />
+    <Content Include="Content\js\app.Tasks.js" />
     <Content Include="Content\js\underscore-min.js" />
+    <Content Include="Content\js\util.js" />
+    <Content Include="Content\tmpl\main.htm" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

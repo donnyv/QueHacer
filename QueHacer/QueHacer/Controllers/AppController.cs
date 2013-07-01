@@ -23,43 +23,17 @@ namespace QueHacer.Controllers
             return JsonUtilities.Result(false).JsonContentResult; 
         }
 
-
-
-        //used to debug controller
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            base.OnException(filterContext);
-        }
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            base.OnActionExecuting(filterContext);
-        }
-
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
-        {
-            base.Initialize(requestContext);
-        }
-
-        protected override void HandleUnknownAction(string actionName)
-        {
-            base.HandleUnknownAction(actionName);
-        }
-        //end used to debug controller
-
-
-
-
         [HttpPost]
         public ContentResult AddTask(ToDodb.Tasks NewTask)
         {
-            AppLogic.AddTask();
-            return JsonUtilities.Result(false).JsonContentResult;  
+            var ret = AppLogic.AddTask(NewTask);
+            return JsonUtilities.Result(ret.Item1, ret.Item2, ret.Item3).JsonContentResult;  
         }
 
         [HttpPost]
-        public ContentResult DeleteTask()
+        public ContentResult DeleteTask(string id)
         {
+            var ret = AppLogic.DeleteTask(id);
             return JsonUtilities.Result(false).JsonContentResult;
         }
 

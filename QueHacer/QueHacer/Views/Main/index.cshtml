@@ -8,9 +8,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Que Hacer!</title>
-    <link rel="stylesheet" type="text/css" href="Content/css/jquery-ui-1.10.3.custom.min.css">
-    <link rel="stylesheet" type="text/css" href="Content/css/main.css"> 
+    <link rel="stylesheet" type="text/css" href="Content/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="Content/css/main.css" /> 
     <!--[if IE]> <link type="text/css" rel="stylesheet" href="Content/css/main_IEonly.css" /> <![endif]-->
+    <script type="text/javascript" src="Content/tmpl/main.htm"></script>
 </head>
 <body>
     <div id="main" class="CenterContent">
@@ -38,7 +39,7 @@
                 </ul>
             </div>
             <div id="TasksContainer" class="BoxGlow_Grey">
-                <table>
+                @*<table>
                     <tbody>
                         <tr>
                             <td>G</td>
@@ -64,81 +65,10 @@
                             <td><button class="greenBtn2">complete</button></td>
                             <td>6/4/13</td>
                         </tr>
-                        <tr>
-                            <td>G</td>
-                            <td><p>Get Raven's birthday gift</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>3/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>S</td>
-                            <td><p>Pickup milk</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>6/4/13</td>
-                        </tr>
-                        <tr>
-                            <td>G</td>
-                            <td><p>Get Raven's birthday gift</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>3/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>S</td>
-                            <td><p>Pickup milk</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>6/4/13</td>
-                        </tr>
-                        <tr>
-                            <td>G</td>
-                            <td><p>Get Raven's birthday gift</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>3/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>S</td>
-                            <td><p>Pickup milk</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>6/4/13</td>
-                        </tr>
-                        <tr>
-                            <td>G</td>
-                            <td><p>Get Raven's birthday gift</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>3/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>S</td>
-                            <td><p>Pickup milk</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>6/4/13</td>
-                        </tr>
-                        <tr>
-                            <td>G</td>
-                            <td><p>Get Raven's birthday gift</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>3/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>S</td>
-                            <td><p>Pickup milk</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>6/4/13</td>
-                        </tr>
-                        <tr>
-                            <td>G</td>
-                            <td><p>Get Raven's birthday gift</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>3/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>S</td>
-                            <td><p>Pickup milk</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>6/4/13</td>
-                        </tr>
                     </tbody>
-                </table>
+                </table>*@
             </div>
+            
         </div>
     </div>
     <div id="NewTask" class="BoxGlow_White">
@@ -170,6 +100,8 @@
     <script src="Content/js/jquery.watermark.js"></script>
     <script src="Content/js/ObjectId.js"></script>
     <script src="App/TodoDB?@DateTime.Now.Ticks"></script>
+    <script src="Content/js/util.js"></script>
+    <script src="Content/js/app.Tasks.js"></script>
     <script src="Content/js/main.js"></script>
 </body>
 </html>

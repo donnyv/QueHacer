@@ -90,9 +90,6 @@ h1 {
 	position:relative;
 	top:1px;
 }
-.greenBtn2 {
-    visibility:hidden;
-}
 .greenBtn3 {
 	-moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
@@ -187,6 +184,16 @@ h1 {
 	color:#2E6D92;
 }
 .fakeURL:hover 
+{
+	text-decoration:none; 
+}
+.fakeURLred
+{
+	cursor:pointer;
+	text-decoration: underline;
+	color:#BF0000;
+}
+.fakeURLred:hover 
 {
 	text-decoration:none; 
 }
@@ -337,7 +344,7 @@ a.boxclose{
     #TasksContainer table tr td:first-child {
         font-size:14pt;
         font-family: sans-serif;
-        background-color: #F7977A;
+        background-color: #E7E3E1;
         color: #fff;
         text-align:center;
         width:20px;
@@ -346,11 +353,18 @@ a.boxclose{
 
     }
     #TasksContainer table td:nth-child(3) {
-        width:75px;
+        width:145px;
     }
     #TasksContainer table td:nth-child(4) {
         width:70px;
     }
+.DeleteTask {
+    font-size:10pt;
+    float: right;
+}
+.TaskControls {
+    display:none;
+}
 #NewTask {
     position: absolute;
     width: 450px;

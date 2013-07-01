@@ -25,12 +25,12 @@ namespace QueHacer.Core
             {
                 var db = new enosql.EnosqlDatabase(dbasePath);
                 db.GetCollection("Tasks").Insert<ToDodb.Tasks>(task);
-                return new Tuple<bool, string, dynamic>(true, "success", new object());
+                return new Tuple<bool, string, dynamic>(false, "success", new object());
             }
             catch (Exception ex)
             {
                 Logging.Log(ex, DefaultValues);
-                return new Tuple<bool, string, dynamic>(false, "Could not create task!", new object());
+                return new Tuple<bool, string, dynamic>(true, "Could not create task!", new object());
             }
         }
 
@@ -46,8 +46,12 @@ namespace QueHacer.Core
 
         public static string GetTodoDBjson()
         {
-            var db = "var todoDB = [];";
-            return db;
+            var dbJSON = "var todoDB = {};";
+
+            var db = new enosql.EnosqlDatabase(dbasePath);
+            var ret = db.GetCollection<ToDodb.Tasks>().FindAll();
+            dbJSON += "todoDB.Tasks = " + ret.Json + ";";
+            return dbJSON;
         }
     }
 }
