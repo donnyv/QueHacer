@@ -13,19 +13,31 @@
 </head>
 <body>
     <div id="main" class="CenterContent">
-        <h2>Que Hacer!</h2>
+        <h1>Que Hacer!</h1>
         <div id="TopBar">
             <button class="greenBtn">Add a New Task</button>
         </div>
         <div>
             <div id="Menu">
-
+                <ul class="TimeFilter">
+                   <li><a href="#"><span>All</span></a></li>
+                   <li><a href="#"><span>Today</span></a></li>
+                   <li><a href="#"><span>Tomorrow</span></a></li>
+                   <li><a href="#"><span>This Week</span></a></li>
+                   <li><a href="#"><span>Next Week</span></a></li>
+                   <li><a href="#"><span>This Month</span></a></li>
+                </ul>
+                <br />
+                <ul class="StatusFilter">
+                    <li><a href="#"><span>Completed</span></a></li>
+                    <li><a href="#"><span>Overdue</span></a></li>
+                    <li><a href="#"><span>Ignoring</span></a></li>
+                </ul>
             </div>
             <div id="TasksContainer">
 
             </div>
         </div>
-        <button id="AddTask">Add Task</button>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="Content/js/main.js"></script>
