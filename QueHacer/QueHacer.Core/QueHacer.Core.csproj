@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="enosql, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\enosql.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
@@ -52,11 +56,42 @@
     <Compile Include="JsonUtilities.cs" />
     <Compile Include="MimeTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToDodb.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\enosql.dll" />
+    <Content Include="bin\Debug\enosql.pdb" />
     <Content Include="bin\Debug\Newtonsoft.Json.dll" />
     <Content Include="bin\Debug\Newtonsoft.Json.pdb" />
     <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\V8.Net.dll" />
+    <Content Include="bin\Debug\V8.Net.pdb" />
+    <Content Include="bin\Debug\V8.Net.SharedTypes.dll" />
+    <Content Include="bin\Debug\V8.Net.SharedTypes.pdb" />
+    <Content Include="bin\Debug\x64\msvcp110d.dll" />
+    <Content Include="bin\Debug\x64\msvcr110d.dll" />
+    <Content Include="bin\Debug\x64\v8-x64.dll" />
+    <Content Include="bin\Debug\x64\v8-x64.pdb" />
+    <Content Include="bin\Debug\x64\V8.Net.Proxy.Interface.dll" />
+    <Content Include="bin\Debug\x64\V8.Net.Proxy.Interface.pdb" />
+    <Content Include="bin\Debug\x64\V8_Net_Proxy_x64.dll" />
+    <Content Include="bin\Debug\x64\V8_Net_Proxy_x64.pdb" />
+    <Content Include="bin\Debug\x64\vcomp110d.dll" />
+    <Content Include="bin\Debug\x86\msvcp110d.dll" />
+    <Content Include="bin\Debug\x86\msvcr110d.dll" />
+    <Content Include="bin\Debug\x86\v8-ia32.dll" />
+    <Content Include="bin\Debug\x86\v8-ia32.pdb" />
+    <Content Include="bin\Debug\x86\V8.Net.Proxy.Interface.dll" />
+    <Content Include="bin\Debug\x86\V8.Net.Proxy.Interface.pdb" />
+    <Content Include="bin\Debug\x86\V8_Net_Proxy_x86.dll" />
+    <Content Include="bin\Debug\x86\V8_Net_Proxy_x86.pdb" />
+    <Content Include="bin\Debug\x86\vccorlib110d.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\x64\V8_Net_Proxy_x64.exp" />
+    <None Include="bin\Debug\x64\V8_Net_Proxy_x64.lib" />
+    <None Include="bin\Debug\x86\V8_Net_Proxy_x86.exp" />
+    <None Include="bin\Debug\x86\V8_Net_Proxy_x86.lib" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

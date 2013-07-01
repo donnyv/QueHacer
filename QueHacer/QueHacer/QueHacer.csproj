@@ -122,6 +122,42 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="App_Data\SiteRefs.txt" />
+    <Content Include="bin\enosql.dll" />
+    <Content Include="bin\enosql.pdb" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Microsoft.Web.Mvc.FixedDisplayModes.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\V8.Net.dll" />
+    <Content Include="bin\V8.Net.pdb" />
+    <Content Include="bin\V8.Net.SharedTypes.dll" />
+    <Content Include="bin\V8.Net.SharedTypes.pdb" />
+    <Content Include="bin\x64\msvcp110d.dll" />
+    <Content Include="bin\x64\msvcr110d.dll" />
+    <Content Include="bin\x64\v8-x64.dll" />
+    <Content Include="bin\x64\v8-x64.pdb" />
+    <Content Include="bin\x64\V8.Net.Proxy.Interface.dll" />
+    <Content Include="bin\x64\V8.Net.Proxy.Interface.pdb" />
+    <Content Include="bin\x64\V8_Net_Proxy_x64.dll" />
+    <Content Include="bin\x64\V8_Net_Proxy_x64.pdb" />
+    <Content Include="bin\x64\vcomp110d.dll" />
+    <Content Include="bin\x86\msvcp110d.dll" />
+    <Content Include="bin\x86\msvcr110d.dll" />
+    <Content Include="bin\x86\v8-ia32.dll" />
+    <Content Include="bin\x86\v8-ia32.pdb" />
+    <Content Include="bin\x86\V8.Net.Proxy.Interface.dll" />
+    <Content Include="bin\x86\V8.Net.Proxy.Interface.pdb" />
+    <Content Include="bin\x86\V8_Net_Proxy_x86.dll" />
+    <Content Include="bin\x86\V8_Net_Proxy_x86.pdb" />
+    <Content Include="bin\x86\vccorlib110d.dll" />
     <Content Include="Content\css\images\animated-overlay.gif" />
     <Content Include="Content\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -141,7 +177,9 @@
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\main_IEonly.css" />
     <Content Include="Content\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Content\js\jquery.watermark.js" />
     <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\ObjectId.js" />
     <Content Include="Content\js\underscore-min.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -168,6 +206,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Main\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\x64\V8_Net_Proxy_x64.exp" />
+    <Content Include="bin\x64\V8_Net_Proxy_x64.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\x86\V8_Net_Proxy_x86.exp" />
+    <Content Include="bin\x86\V8_Net_Proxy_x86.lib" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -197,6 +243,10 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>del "$(SolutionDir)QueHacer\bin\V8.Net.Proxy.Interface.dll"
+del "$(SolutionDir)QueHacer\bin\V8.Net.Proxy.Interface.pdb"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

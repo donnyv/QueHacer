@@ -1,8 +1,54 @@
 ﻿$().ready(function () {
 
+    // setup
+    $("#ntTaskDesc").watermark("Add your task here!", { className: "watermark" });
+    $("#ntCategory").watermark("add category", { className: "watermark" });
+
     // events
     $("#AddTask").on("click", function () {
-        alert("hey!");
+        $("#Overlay").fadeIn(200);
+        $("#NewTask").show("drop", { direction: "up" }, 400);
+    });
+
+    $("#ntDueDate").on("click", function () {
+        $("#datepicker").show().datepicker({
+            onSelect: function (date) {
+                $("#ntDueDateLabel,#ntRemoveDate").show();
+                $("#ntDueDate").html(date).attr("data-duedate", date);
+                $("#datepicker").hide();
+            }
+        });
+    });
+
+    $("#ntRemoveDate").on("click", function () {
+        $("#ntDueDateLabel,#ntRemoveDate").hide();
+        $("#ntDueDate").html("Add due date").attr("data-duedate", "");;
+    });
+
+    $("#ntSaveClose").on("click", function () {
+        
+        var taskItem = {
+            _id: new ObjectId().toString(),
+            task: $.trim($("#ntTaskDesc").val()),
+            duedate: $("#ntDueDate").attr("data-duedate"),
+            category: $.trim($("#ntCategory").val())
+        };
+
+        if (taskItem.task == "")
+            return;
+
+        AddTask(task, function (result) {
+            
+        });
+    });
+
+    $("#ntSaveAnother").on("click", function () {
+
+    });
+
+    $("#ntClose").on("click", function () {
+        $("#Overlay").fadeOut(200);
+        $("#NewTask").hide("drop", { direction: "up" }, 300);
     });
 
     // actions

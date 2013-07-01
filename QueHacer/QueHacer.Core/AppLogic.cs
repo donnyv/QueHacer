@@ -18,8 +18,8 @@ namespace QueHacer.Core
         }
         public static Tuple<bool, string, dynamic> AddTask()
         {
-            //var db = new enosql.EnosqlDatabase(dbasePath);
-            //db.GetCollection("test").Insert<User>(new User() { UserName = "Raven" });
+            var db = new enosql.EnosqlDatabase(dbasePath);
+            db.GetCollection("test").Insert<User>(new User() { UserName = "Raven" });
 
             return new Tuple<bool, string, dynamic>(true, "success", new object());
         }

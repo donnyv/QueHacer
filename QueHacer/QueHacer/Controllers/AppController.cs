@@ -23,7 +23,7 @@ namespace QueHacer.Controllers
         }
 
         [HttpPost]
-        public ContentResult AddTask()
+        public ContentResult AddTask(ToDodb.Tasks task)
         {
             AppLogic.AddTask();
             return JsonUtilities.Result(false).JsonContentResult;  
