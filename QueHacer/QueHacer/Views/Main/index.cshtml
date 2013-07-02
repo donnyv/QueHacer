@@ -22,12 +22,16 @@
         <div id="TopBar">
             <button id="AddTask" class="greenBtn" style="margin-left: -1px;">Add a New Task</button>
             <span id="nag"></span>
+            
             <div style="position:relative;" >
                 <span id="FilterTask" class="fakeURL filterStyle">all</span>
                 <span class="filterStyle" style="margin-right:5px;">show</span>
                 <div id="CategoryList"></div>
             </div>
-            
+            @*<div style="float:right; margin-right:100px; margin-top: -16px;" title="Turn up your sound!">
+                <span id="ReadTasks" class="fakeURL">Read tasks</span>
+                <img src="/Content/imgs/audio.png" style="vertical-align: -2px;" />
+            </div>*@
         </div>
         <div>
             <div id="Menu">
@@ -78,6 +82,8 @@
     <div id="Overlay" class="black_overlay"></div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="Content/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="Content/js/soundmanager2-nodebug-jsmin.js"></script>
+    <script src="Content/js/TextToSpeech.js"></script>
     <script src="Content/js/underscore-min.js"></script>
     <script src="Content/js/jquery.watermark.js"></script>
     <script src="Content/js/ObjectId.js"></script>

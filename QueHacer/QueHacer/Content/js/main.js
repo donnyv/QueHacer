@@ -1,4 +1,5 @@
 ﻿/// <reference path="app.Tasks.js" />
+/// <reference path="TextToSpeech.js" />
 
 $().ready(function () {
     // globals
@@ -8,6 +9,7 @@ $().ready(function () {
     app.Tasks.currentFilter = { dateFilter: null, status: null, category: "all" };
     $("#ntTaskDesc").watermark("Add your task here!", { className: "watermark" });
     $("#ntCategory").watermark("add category", { className: "watermark" });
+    text2speech.setup();
 
     // render
     app.Tasks.render(function () {
@@ -54,6 +56,17 @@ $().ready(function () {
         app.Tasks.render();
         $("#FilterTask").html($(this).html());
         $("#CategoryList").hide();
+    });
+
+    $("#ReadTasks").on("click", function () {
+        if ($("#ReadTasks").html() == "Stop reading") {
+            $("#ReadTasks").html("Read tasks");
+            text2speech.stop();
+        } else {
+            text2speech.stop();
+            text2speech.start();
+            $("#ReadTasks").html("Stop reading");
+        }
     });
 
     // tasks events

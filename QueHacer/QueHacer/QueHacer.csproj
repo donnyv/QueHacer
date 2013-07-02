@@ -195,6 +195,8 @@
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\ObjectId.js" />
     <Content Include="Content\js\app.Tasks.js" />
+    <Content Include="Content\js\soundmanager2-nodebug-jsmin.js" />
+    <Content Include="Content\js\TextToSpeech.js" />
     <Content Include="Content\js\underscore-min.js" />
     <Content Include="Content\js\util.js" />
     <Content Include="Content\tmpl\main.htm" />
@@ -209,6 +211,8 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\flash\" />
+    <Folder Include="Content\imgs\" />
     <Folder Include="Models\" />
     <Folder Include="_Database\" />
     <Folder Include="_Logs\" />
