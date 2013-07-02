@@ -148,7 +148,7 @@ $().ready(function () {
 
         if (taskItem.duedate != 0) {
             var date = app.Util.UTCtoDate(taskItem.duedate);
-            $("#ntDueDateLabel,#ntRemoveDate").show();
+            $("#ntDueDateLabel").show();
             $("#ntDueDate").html(date).attr("data-duedate", date);
         }
 

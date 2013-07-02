@@ -102,22 +102,79 @@
         // no filter return all not completed
         if (filter.dateFilter == null && filter.status == null) {
             var d = _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.unfinished });
-            return _.sortBy(d, function (t) { return t.duedate }).reverse();
+            return _.sortBy(d, function (t) { return t.duedate }); //.reverse();
         }
         
         // only filter by status
         if (filter.status && !filter.dateFilter) {
-            return _.filter(todoDB.Tasks, function (t) { return t.status == filter.status });
+            switch (filter.status) {
+                case tasksList.status.complete:
+                    return _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.complete });
+                    break;
+                case tasksList.status.overdue:
+                    
+                    break;
+            }
+            
         }
 
         // only filter by dateFilter
         if (!filter.status && filter.dateFilter) {
+            var dateFilter;
             switch (filter.dateFilter) {
                 case tasksList.dateFilter.Today:
+                    var today = new Date();
+                    dateFilter = Date.parse(new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear()).toUTCString())
+                    
+                    return _.filter(todoDB.Tasks, function (t) { return t.duedate == dateFilter });
+                    break;
+                case tasksList.dateFilter.Tomorrow:
+                    // to add 1 day
+                    var today = new Date();
+                    var almostTomorrow = new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear());
+                    almostTomorrow.setDate(today.getDate() + 1);
+                    dateFilter = app.Util.DatetoUTC(almostTomorrow);
 
+                    return _.filter(todoDB.Tasks, function (t) { return t.duedate == dateFilter });
+                    break;
+                case tasksList.dateFilter.ThisWeek:
+                    // to add 7 day
+                    var today = new Date();
+                    var todayUTC = Date.parse(new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear()).toUTCString())
+
+                    var onlydateNoTime = new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear());
+                    onlydateNoTime.setDate(today.getDate() + 7);
+                    var SevendaysFromNow = app.Util.DatetoUTC(onlydateNoTime);
+
+                    var d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= todayUTC &&  t.duedate <= SevendaysFromNow});
+                    return _.sortBy(d, function (t) { return t.duedate }); //.reverse();
+                    break;
+                case tasksList.dateFilter.NextWeek:
+                    var today = new Date();
+                    var onlydateNoTime = new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear());
+                    onlydateNoTime.setDate(today.getDate() + 8);
+                    var EightdaysFromNow = app.Util.DatetoUTC(onlydateNoTime);
+
+                    onlydateNoTime.setDate(onlydateNoTime.getDate() + 7);
+                    var EndofNextWeek = app.Util.DatetoUTC(onlydateNoTime);
+
+                    var d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= EightdaysFromNow && t.duedate <= EndofNextWeek });
+                    return _.sortBy(d, function (t) { return t.duedate });
+                    break;
+                case tasksList.dateFilter.ThisMonth:
+                    var today = new Date();
+                    var todayUTC = Date.parse(new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear()).toUTCString())
+
+                    var onlydateNoTime = new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear());
+                    onlydateNoTime.setDate(today.getDate() + 30);
+                    var OneMonthFromNow = app.Util.DatetoUTC(onlydateNoTime);
+
+                    var d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= todayUTC && t.duedate <= OneMonthFromNow });
+                    return _.sortBy(d, function (t) { return t.duedate });
+                    break;
             }
 
-            return _.filter(todoDB.Tasks, function (t) { return t.dateFilter == filter.dateFilter });
+            
         }
     }
 
@@ -179,7 +236,8 @@
         },
         status: {
             complete: "completed",
-            unfinished: "unfinished"
+            unfinished: "unfinished",
+            overdue: "overdue"
         },
         dateFilter: {
             Today: "today",
