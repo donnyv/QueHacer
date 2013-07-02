@@ -1,4 +1,7 @@
-﻿#NewTask {
+﻿h3 {
+    margin:0;
+}
+#NewTask {
     position: absolute;
     width: 450px;
     height: 400px;
