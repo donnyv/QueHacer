@@ -5,6 +5,7 @@ $().ready(function () {
     var duedateText = "Add due date";
 
     // setup
+    app.Tasks.currentFilter = { dateFilter: null, status: null };
     $("#ntTaskDesc").watermark("Add your task here!", { className: "watermark" });
     $("#ntCategory").watermark("add category", { className: "watermark" });
 
@@ -19,8 +20,25 @@ $().ready(function () {
         $("#NewTask").show("drop", { direction: "up" }, 400);
     });
 
-    $("#StatusFilter").on("click", "li", function () {
-        alert("hey"); //:not('.selected')
+    $("#TimeFilter").on("click", "li:not('.selected')", function () {
+        var dateFilter = $(this).attr("data-type");
+        app.Tasks.currentFilter.dateFilter = (dateFilter == "all" ? null : dateFilter);
+        app.Tasks.currentFilter.status = null;
+        $(this).parent("ul").find("li").removeClass("selected");
+        $(this).addClass("selected");
+        $("#StatusFilter").find("li").removeClass("selected");
+
+        app.Tasks.render();
+    });
+
+    $("#StatusFilter").on("click", "li:not('.selected')", function () {
+        app.Tasks.currentFilter.dateFilter = null;
+        app.Tasks.currentFilter.status = $(this).attr("data-type");
+        $(this).parent("ul").find("li").removeClass("selected");
+        $(this).addClass("selected");
+        $("#TimeFilter").find("li").removeClass("selected");
+
+        app.Tasks.render();
     });
 
 
@@ -89,7 +107,8 @@ $().ready(function () {
             _id: new ObjectId().toString(),
             task: $.trim($("#ntTaskDesc").val()),
             duedate: dueDate,
-            category: $.trim($("#ntCategory").val())
+            category: $.trim($("#ntCategory").val()),
+            status: app.Tasks.status.unfinished
         };
 
         if (taskItem.task == "")

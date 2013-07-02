@@ -373,6 +373,10 @@ a.boxclose{
     #TasksContainer table td:nth-child(4) {
         width:70px;
     }
+.NoTasks {
+    padding: 20px;
+    font-size: 14pt;
+}
 .DeleteTask {
     font-size:10pt;
     float: right;

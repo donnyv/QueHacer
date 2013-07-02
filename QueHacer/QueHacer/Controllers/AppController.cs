@@ -11,7 +11,6 @@ namespace QueHacer.Controllers
 {
     public class AppController : Controller
     {
-
         public JavaScriptResult TodoDB()
         {
             return (new JavaScriptResult() { Script = AppLogic.GetTodoDBjson() });
@@ -38,9 +37,9 @@ namespace QueHacer.Controllers
         }
 
         [HttpPost]
-        public ContentResult UpdateTask(ToDodb.Tasks Task)
+        public ContentResult UpdateTask(ToDodb.Tasks UpdateTask)
         {
-            var ret = AppLogic.UpdateTask(Task);
+            var ret = AppLogic.UpdateTask(UpdateTask);
             return JsonUtilities.Result(ret.Item1, ret.Item2, ret.Item3).JsonContentResult;
         }
     }

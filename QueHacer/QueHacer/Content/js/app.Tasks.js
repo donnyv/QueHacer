@@ -10,6 +10,7 @@
     t.push("TasksList");
     t.push("Tasks");
     t.push("NoTasks");
+    t.push("NoTasksCustom");
 
     var TaskContainer = $("#TasksContainer");
 
@@ -79,7 +80,11 @@
             if (todoDB.Tasks.length == 0) {
                 TaskContainer.empty().append(tasks.tl.NoTasks());
             } else {
-                TaskContainer.empty().append(tasks.tl.TasksList({ rows: tasks.tl.Tasks(GetData(tasksList.currentFilter)) }));
+                var data = GetData(tasksList.currentFilter);
+                if (data.length == 0)
+                    TaskContainer.empty().append(tasks.tl.NoTasksCustom());
+                else
+                    TaskContainer.empty().append(tasks.tl.TasksList({ rows: tasks.tl.Tasks(data) }));
             }
 
             if(callback)
@@ -90,18 +95,22 @@
     /*
     filter = {
         status: [statuses from app.Tasks.status],
-        datefilter: [statuses from app.Tasks.dateFilter]
+        dateFilter: [statuses from app.Tasks.dateFilter]
     }
     */
     function GetData(filter) {
-        // no filter return all
-        if (filter == null)
-            return todoDB.Tasks;
+        // no filter return all not completed
+        if (filter.dateFilter == null && filter.status == null)
+            return _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.unfinished });
         
         // only filter by status
-        _.filter([1, 2, 3, 4, 5, 6], function (num) { return num % 2 == 0; });
         if (filter.status && !filter.dateFilter) {
-            return _.filter(todoDB.Tasks, function (t) { return t == t.status == tasksList.status.complete });
+            return _.filter(todoDB.Tasks, function (t) { return t.status == filter.status });
+        }
+
+        // only filter by dateFilter
+        if (!filter.status && filter.dateFilter) {
+            return _.filter(todoDB.Tasks, function (t) { return t.dateFilter == filter.dateFilter });
         }
     }
 
@@ -121,6 +130,10 @@
                     for (var i = 0, l = todoDB.Tasks.length; i < l; i++) {
                         if (todoDB.Tasks[i]._id == id) {
                             todoDB.Tasks.splice(i, 1);
+
+                            if (todoDB.Tasks.length == 0)
+                                RenderTasks();
+
                             break;
                         }
                     }
@@ -158,14 +171,15 @@
             RenderTasks(callback);
         },
         status: {
-            complete: "complete"
+            complete: "completed",
+            unfinished: "unfinished"
         },
         dateFilter: {
-            Today: "Today",
-            Tomorrow: "Tomorrow",
-            ThisWeek: "This Week",
-            NextWeek: "Next Week",
-            ThisMonth: "This Month"
+            Today: "today",
+            Tomorrow: "tomorrow",
+            ThisWeek: "thisweek",
+            NextWeek: "nextweek",
+            ThisMonth: "thismonth"
         },
         currentFilter: null
     };
