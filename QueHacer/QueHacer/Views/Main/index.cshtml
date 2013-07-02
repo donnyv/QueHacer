@@ -39,39 +39,10 @@
                 </ul>
             </div>
             <div id="TasksContainer" class="BoxGlow_Grey">
-                @*<table>
-                    <tbody>
-                        <tr>
-                            <td>G</td>
-                            <td><p>Get Raven's birthday gift</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>3/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>S</td>
-                            <td><p>Pickup milk</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>6/4/13</td>
-                        </tr>
-                        <tr>
-                            <td>G</td>
-                            <td><p>Get Raven's birthday gift</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>3/12/13</td>
-                        </tr>
-                        <tr>
-                            <td>S</td>
-                            <td><p>Pickup milk</p></td>
-                            <td><button class="greenBtn2">complete</button></td>
-                            <td>6/4/13</td>
-                        </tr>
-                    </tbody>
-                </table>*@
             </div>
-            
         </div>
     </div>
-    <div id="NewTask" class="BoxGlow_White">
+    <div id="NewTask" data-taskid="" class="BoxGlow_White">
         <div id="ntTop">
             <div id="DatePickerContainer">
                 <span id="ntDueDateLabel">due:</span>
@@ -86,6 +57,7 @@
         </div>
         <div id="ntContent">
             <textarea id="ntTaskDesc" class="GlowTextbox" ></textarea>
+            <button id="ntStatus" class="greenBtn2">completed</button>
         </div>
         <div id="ntBottom">
             <button id="ntSaveClose" class="greenBtn3">Save & Close</button>

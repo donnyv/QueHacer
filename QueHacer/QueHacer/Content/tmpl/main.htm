@@ -27,7 +27,9 @@
             <td><p><%- o.task %></p></td>
             <td>
                 <div class="TaskControls">
+                    <% if(o.status != app.Tasks.status.complete) {%> 
                     <button class="greenBtn2 CompleteTask">complete</button>
+                    <%}%>
                     <span class="fakeURLred DeleteTask">delete</span>
                 </div>
             </td>

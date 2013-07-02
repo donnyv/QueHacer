@@ -100,8 +100,10 @@
     */
     function GetData(filter) {
         // no filter return all not completed
-        if (filter.dateFilter == null && filter.status == null)
-            return _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.unfinished });
+        if (filter.dateFilter == null && filter.status == null) {
+            var d = _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.unfinished });
+            return _.sortBy(d, function (t) { return t.duedate }).reverse();
+        }
         
         // only filter by status
         if (filter.status && !filter.dateFilter) {
@@ -110,6 +112,11 @@
 
         // only filter by dateFilter
         if (!filter.status && filter.dateFilter) {
+            switch (filter.dateFilter) {
+                case tasksList.dateFilter.Today:
+
+            }
+
             return _.filter(todoDB.Tasks, function (t) { return t.dateFilter == filter.dateFilter });
         }
     }

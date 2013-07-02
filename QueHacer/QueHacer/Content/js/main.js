@@ -49,7 +49,16 @@ $().ready(function () {
         $(".TaskControls").hide();
     });
 
-    $("#TasksContainer").on("click", ".DeleteTask", function () {
+    $("#TasksContainer").on("click", "tr", function () {
+        var id = $(this).attr("data-taskid");
+        LoadTask(id);
+        $("#Overlay").fadeIn(200);
+        $("#NewTask").show("drop", { direction: "up" }, 400);
+    });
+
+    $("#TasksContainer").on("click", ".DeleteTask", function (event) {
+        event.stopPropagation();
+
         var row = $(this).parents("tr");
         var id = row.attr("data-taskid");
         app.Tasks.Delete(id, function (result) {
@@ -59,7 +68,9 @@ $().ready(function () {
         });
     });
 
-    $("#TasksContainer").on("click", ".CompleteTask", function () {
+    $("#TasksContainer").on("click", ".CompleteTask", function (event) {
+        event.stopPropagation();
+
         var row = $(this).parents("tr");
         var id = row.attr("data-taskid");
         var task = app.Tasks.getTask(id);
@@ -101,10 +112,11 @@ $().ready(function () {
 
     // methods
     function SaveTask(NotCloseWhenDone) {
-        dueDate = $("#ntDueDate").attr("data-duedate") != "" ? app.Util.DatetoUTC(new Date($("#ntDueDate").attr("data-duedate"))) : 0;
+        var dueDate = $("#ntDueDate").attr("data-duedate") != "" ? app.Util.DatetoUTC(new Date($("#ntDueDate").attr("data-duedate"))) : 0;
+        var id = $("#NewTask").attr("data-taskid") == "" ? new ObjectId().toString() : $("#NewTask").attr("data-taskid");
 
         var taskItem = {
-            _id: new ObjectId().toString(),
+            _id: id,
             task: $.trim($("#ntTaskDesc").val()),
             duedate: dueDate,
             category: $.trim($("#ntCategory").val()),
@@ -114,10 +126,38 @@ $().ready(function () {
         if (taskItem.task == "")
             return;
 
-        app.Tasks.add(taskItem, function (result) {
-            if (!NotCloseWhenDone)
-                CloseDialog();
-        });
+        if ($("#NewTask").attr("data-taskid") == "") {
+            app.Tasks.add(taskItem, function (result) {
+                if (!NotCloseWhenDone)
+                    CloseDialog();
+            });
+        } else {
+            app.Tasks.update(taskItem, function (result) {
+                if (!NotCloseWhenDone)
+                    CloseDialog();
+
+                app.Tasks.render();
+            });
+        }
+    }
+    function LoadTask(id) {
+        
+        var taskItem = app.Tasks.getTask(id);
+        $("#NewTask").attr("data-taskid", taskItem._id);
+        $("#ntTaskDesc").val(taskItem.task);
+
+        if (taskItem.duedate != 0) {
+            var date = app.Util.UTCtoDate(taskItem.duedate);
+            $("#ntDueDateLabel,#ntRemoveDate").show();
+            $("#ntDueDate").html(date).attr("data-duedate", date);
+        }
+
+        $("#ntCategory").val(taskItem.category)
+
+        if (taskItem.status == app.Tasks.status.complete) {
+            $("#ntStatus").show();
+            $("#ntSaveClose,#ntSaveAnother").hide();
+        }
     }
     function ResetDueDate() {
         $("#ntDueDateLabel,#ntRemoveDate").hide();
@@ -127,11 +167,16 @@ $().ready(function () {
         $("#ntTaskDesc").val("");
         $("#ntCategory").val("")
         ResetDueDate();
+        $("#ntStatus").hide();
+        $("#ntSaveClose,#ntSaveAnother").show();
+        $("#NewTask").attr("data-taskid", "");
     }
     function CloseDialog() {
         $("#Overlay").fadeOut(200);
-        $("#NewTask").hide("drop", { direction: "up" }, 300);
-        ResetDialog();
+        $("#NewTask").hide("drop", { direction: "up" }, 300, function () {
+            ResetDialog();
+        });
+        
     }
 
     
