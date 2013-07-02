@@ -311,6 +311,17 @@ a.boxclose{
      background: #f90;
      position: relative;
     }
+    #Menu li.selected {
+        background: #f90;
+        position: relative;
+    }
+    #Menu li.selected:hover {
+     cursor:default;
+    }
+    #Menu li.selected:hover a:hover{
+     text-decoration:none;
+     cursor:default;
+    }
 #TasksContainer {
     float:left;
     width: 795px;
@@ -335,6 +346,10 @@ a.boxclose{
     }
     #TasksContainer table p {
         margin:0;
+    }
+    #TasksContainer table tr
+    {
+        height: 34px;
     }
     #TasksContainer table tr:hover td {
         background: #d0dafd;

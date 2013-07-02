@@ -9,11 +9,15 @@
     </table>
 </script>
 <script type="text/template" id="Tasks">
-    <%_.each(m, function(o){ %>
-        <%
+    <%
+        var cat;
+        var duedate;
         var colors = {A: 'F7977A',B: 'C4DF9B',C: 'FDC68A',D: 'FFF79A',E: 'F9AD81',F: 'A2D39C',G: 'A2D39C',H: '82CA9D',I: '7BCDC8',J: '6ECFF6',K: '7EA7D8',L: '8493CA',M: '8882BE',N: 'A187BE',O: 'BC8DBF',P: 'F49AC2',Q: 'F6989D',R: 'ED1C24',S: 'F26522',T: 'F7941D',U: 'FFF200',V: '8DC73F',W: '0072BC',X: '662D91',Y: 'EC008C',Z: '00A651'};
-        var cat = $.trim(o.category) == '' ? '' : o.category[0].toUpperCase();
-        var duedate = o.duedate == 0 ? "" : app.Util.UTCtoDate(o.duedate);
+        
+       _.each(m, function(o){ %>
+        <%
+        cat = $.trim(o.category) == '' ? '' : o.category[0].toUpperCase();
+        duedate = o.duedate == 0 ? "" : app.Util.UTCtoDate(o.duedate);
         %>
         <tr data-taskid="<%= o._id %>">
             <td title="<%= o.category %>" style="background-color:#<%= colors[cat] %>;"><%=cat %></td>

@@ -21,14 +21,21 @@ namespace QueHacer.Core
         {
             try
             {
+                if (task == null || string.IsNullOrWhiteSpace(task.task))
+                    return new Tuple<bool, string, dynamic>(true, "Empty task sent", null);
+
                 var db = new enosql.EnosqlDatabase(dbasePath);
-                db.GetCollection("Tasks").Insert<ToDodb.Tasks>(task);
-                return new Tuple<bool, string, dynamic>(false, "success", new object());
+                var ret = db.GetCollection<ToDodb.Tasks>().Insert(task);
+
+                if(ret.IsError)
+                    Logging.Log(new Logging.LogItem() { Msg = ret .Msg}, DefaultValues);
+                
+                return new Tuple<bool, string, dynamic>(ret.IsError, ret.IsError ? "failed database error" : "success", null);
             }
             catch (Exception ex)
             {
                 Logging.Log(ex, DefaultValues);
-                return new Tuple<bool, string, dynamic>(true, "Could not create task!", new object());
+                return new Tuple<bool, string, dynamic>(true, "Could not create task!", null);
             }
         }
 
@@ -37,19 +44,40 @@ namespace QueHacer.Core
             try
             {
                 var db = new enosql.EnosqlDatabase(dbasePath);
-                db.GetCollection("Tasks").Remove(id);
-                return new Tuple<bool, string, dynamic>(false, "success", new object());
+                var ret = db.GetCollection<ToDodb.Tasks>().Remove(id);
+
+                if (ret.IsError)
+                    Logging.Log(new Logging.LogItem() { Msg = ret.Msg }, DefaultValues);
+
+                return new Tuple<bool, string, dynamic>(ret.IsError, ret.IsError ? "failed database error" : "success", null);
             }
             catch (Exception ex)
             {
                 Logging.Log(ex, DefaultValues);
-                return new Tuple<bool, string, dynamic>(true, "Could not delete task!", new object());
+                return new Tuple<bool, string, dynamic>(true, "Could not delete task!", null);
             }
         }
 
-        public static Tuple<bool, string, dynamic> UpdateTask()
+        public static Tuple<bool, string, dynamic> UpdateTask(ToDodb.Tasks task)
         {
-            return new Tuple<bool, string, dynamic>(true, "success", new object());
+            try
+            {
+                if (task == null || string.IsNullOrWhiteSpace(task.task))
+                    return new Tuple<bool, string, dynamic>(true, "Empty task sent", null);
+
+                var db = new enosql.EnosqlDatabase(dbasePath);
+                var ret = db.GetCollection<ToDodb.Tasks>().Update(task);
+
+                if (ret.IsError)
+                    Logging.Log(new Logging.LogItem() { Msg = ret.Msg }, DefaultValues);
+
+                return new Tuple<bool, string, dynamic>(ret.IsError, ret.IsError ? "failed database error" : "success", null);
+            }
+            catch (Exception ex)
+            {
+                Logging.Log(ex, DefaultValues);
+                return new Tuple<bool, string, dynamic>(true, "Could not update task!", null);
+            }
         }
 
         public static string GetTodoDBjson()

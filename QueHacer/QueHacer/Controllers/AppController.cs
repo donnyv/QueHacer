@@ -34,13 +34,14 @@ namespace QueHacer.Controllers
         public ContentResult DeleteTask(string id)
         {
             var ret = AppLogic.DeleteTask(id);
-            return JsonUtilities.Result(false).JsonContentResult;
+            return JsonUtilities.Result(ret.Item1, ret.Item2, ret.Item3).JsonContentResult;
         }
 
         [HttpPost]
-        public ContentResult UpdateTask()
+        public ContentResult UpdateTask(ToDodb.Tasks Task)
         {
-            return JsonUtilities.Result(false).JsonContentResult;
+            var ret = AppLogic.UpdateTask(Task);
+            return JsonUtilities.Result(ret.Item1, ret.Item2, ret.Item3).JsonContentResult;
         }
     }
 }
