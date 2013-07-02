@@ -37,3 +37,10 @@
         </tr>
     <% }); %>
 </script>
+<script type="text/template" id="CategoryList">
+    <ul>
+    <%_.each(m, function(o){ %>
+        <li class="Category"><%- o %></li>
+    <% }); %>
+    </ul>
+</script>

@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+@model List<QueHacer.Core.ToDodb.Tasks>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Que Hacer!</title>
+    <link rel="stylesheet" type="text/css" href="/Content/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/css/taskcard.css" />
+</head>
+<body>
+    <div class="CenterContent">
+        @if(Model.Count == 0){
+        <p style="font-size:14pt; padding:20px;">This task has eigther been deleted or you typed in the wrong url.</p>
+        } else {
+        <div id="NewTask" class="BoxGlow_White" style="display:block;">
+            <div id="ntTop">
+                <div id="DatePickerContainer">
+                    @if(Model[0].duedate != 0){ <span id="ntDueDateLabel">due:</span> }
+                    @if(Model[0].duedate != 0){ <span id="ntDueDate" class="fakeURL" data-duedate="">@Model[0].duedate.ToString()</span>}
+                </div>
+                <div id="ntCategoryContainer">
+                    @if (!string.IsNullOrWhiteSpace(Model[0].category)){<span><b>category: </b>@Model[0].category</span>}
+                </div>
+            </div>
+            <div id="ntContent">
+                <textarea id="ntTaskDesc" class="GlowTextbox">@Model[0].task</textarea>
+                @if(Model[0].status == "completed"){
+                <button id="ntStatus" class="greenBtn2">completed</button>
+                }
+            </div>
+        </div>
+        }
+    </div>
+</body>
+</html>

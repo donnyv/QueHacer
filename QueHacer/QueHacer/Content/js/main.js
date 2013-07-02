@@ -5,7 +5,7 @@ $().ready(function () {
     var duedateText = "Add due date";
 
     // setup
-    app.Tasks.currentFilter = { dateFilter: null, status: null };
+    app.Tasks.currentFilter = { dateFilter: null, status: null, category: "all" };
     $("#ntTaskDesc").watermark("Add your task here!", { className: "watermark" });
     $("#ntCategory").watermark("add category", { className: "watermark" });
 
@@ -41,6 +41,20 @@ $().ready(function () {
         app.Tasks.render();
     });
 
+    $("#FilterTask").on("click", function () {
+        $("#CategoryList").show();
+    });
+
+    $("#CategoryList").hover(null, function () {
+        $("#CategoryList").fadeOut(200);
+    });
+
+    $("#CategoryList").on("click", "li", function () {
+        app.Tasks.currentFilter = { dateFilter: app.Tasks.currentFilter.dateFilter, status: app.Tasks.currentFilter.status, category: $(this).html() };
+        app.Tasks.render();
+        $("#FilterTask").html($(this).html());
+        $("#CategoryList").hide();
+    });
 
     // tasks events
     $("#TasksContainer").on("mouseenter", "tr", function () {
@@ -107,19 +121,27 @@ $().ready(function () {
         ResetDialog();
     });
 
-    $("#ntClose").on("click", CloseDialog);
+    $("#ntClose").on("click", function(){
+        CloseDialog();   
+    });
 
+    $("#ntShare").on("click", function () {
+        var id = $("#NewTask").attr("data-taskid");
+        $("#ntShareURL").val(app.Util.GetSiteBaseURL() +"/task/" + id);
+        $("#ntShareURL").fadeIn(200);
+    });
 
     // methods
     function SaveTask(NotCloseWhenDone) {
         var dueDate = $("#ntDueDate").attr("data-duedate") != "" ? app.Util.DatetoUTC(new Date($("#ntDueDate").attr("data-duedate"))) : 0;
         var id = $("#NewTask").attr("data-taskid") == "" ? new ObjectId().toString() : $("#NewTask").attr("data-taskid");
+        var cat = $.trim($("#ntCategory").val()) == "" ? "" : $.trim($("#ntCategory").val()).toLowerCase();
 
         var taskItem = {
             _id: id,
             task: $.trim($("#ntTaskDesc").val()),
             duedate: dueDate,
-            category: $.trim($("#ntCategory").val()),
+            category: cat,
             status: app.Tasks.status.unfinished
         };
 
@@ -158,6 +180,8 @@ $().ready(function () {
             $("#ntStatus").show();
             $("#ntSaveClose,#ntSaveAnother").hide();
         }
+
+        $("#ntShare").show();
     }
     function ResetDueDate() {
         $("#ntDueDateLabel,#ntRemoveDate").hide();
@@ -170,6 +194,8 @@ $().ready(function () {
         $("#ntStatus").hide();
         $("#ntSaveClose,#ntSaveAnother").show();
         $("#NewTask").attr("data-taskid", "");
+        $("#ntShare,#ntShareURL").hide();
+        $("#ntShareURL").val("");
     }
     function CloseDialog() {
         $("#Overlay").fadeOut(200);

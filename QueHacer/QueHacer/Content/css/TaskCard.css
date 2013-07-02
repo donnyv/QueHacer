@@ -1,0 +1,68 @@
+﻿#NewTask {
+    position: absolute;
+    width: 450px;
+    height: 400px;
+    z-index: 99;
+    background-color: #fff;
+    border: 1px #ddd solid;
+    top: 100px;
+    margin-left: 50%;
+    left: -246px;
+    padding: 20px;
+    display:none;
+}
+#ntTop {
+    border-bottom: 1px #ccc solid;
+    padding-bottom: 10px; 
+    height: 25px;
+}
+#DatePickerContainer {
+    display:inline-block;
+}
+#ntDueDateLabel {
+    display:none;
+}
+#DueDate {
+
+}
+#ntCategoryContainer {
+    display: inline-block;
+    float: right;
+}
+#ntCategory {
+    padding:5px;
+}
+#ntTaskDesc {
+    width: 445px;
+    height: 293px;
+    border:0;
+    padding:5px;
+    resize: none;
+}
+#ntContent {
+    height:340px;
+}
+#ntBottom {
+    width: 100%;
+    text-align: right;
+    padding-top: 5px;
+    border-top: 1px #ccc solid;
+}
+#datepicker {
+    font-size: 62.5%;
+    position: absolute;
+    display: none;
+}
+#ntStatus {
+    display:none;
+}
+#ntShare {
+    float:right;
+    display:none;
+}
+#ntShareURL {
+    display:none;
+    padding:5px;
+    float:right;
+    width: 220px;
+}

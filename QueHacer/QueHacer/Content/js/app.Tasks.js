@@ -11,8 +11,7 @@
     t.push("Tasks");
     t.push("NoTasks");
     t.push("NoTasksCustom");
-
-    var TaskContainer = $("#TasksContainer");
+    t.push("CategoryList");
 
     // controller actions
     function AddTaskPOST(NewTask, callback) {
@@ -75,6 +74,8 @@
     }
 
     // render methods
+    var TaskContainer = $("#TasksContainer");
+    var CategoryList = $("#CategoryList");
     function RenderTasks(callback) {
         app.Util.CompileTemplates(templatesURL, t, tasks, function () {
             if (todoDB.Tasks.length == 0) {
@@ -90,6 +91,31 @@
             if(callback)
                 callback();
         });
+
+        RenderFilterList();
+    }
+    function RenderFilterList(callback) {
+        app.Util.CompileTemplates(templatesURL, t, tasks, function () {
+            if (todoDB.Tasks.length == 0) {
+                CategoryList.empty().append("No filters");
+            } else {
+                var cats = [];
+                for (var i = 0, l = todoDB.Tasks.length; i < l; i++) {
+                    if(!$.trim(todoDB.Tasks[i].category) == "")
+                        cats.push(todoDB.Tasks[i].category);
+                }
+
+                var data = _.uniq(cats);
+                data.splice(0, 0, "all");
+                if (data.length == 0)
+                    CategoryList.empty().append("No filters");
+                else
+                    CategoryList.empty().append(tasks.tl.CategoryList(data.sort()));
+            }
+
+            if (callback)
+                callback();
+        });
     }
 
     /*
@@ -101,7 +127,12 @@
     function GetData(filter) {
         // no filter return all not completed
         if (filter.dateFilter == null && filter.status == null) {
-            var d = _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.unfinished });
+            var d;
+            if (filter.category == "all")
+                d = _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.unfinished });
+            else
+                d = _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.unfinished && t.category == filter.category });
+
             return _.sortBy(d, function (t) { return t.duedate }); //.reverse();
         }
         
@@ -109,10 +140,20 @@
         if (filter.status && !filter.dateFilter) {
             switch (filter.status) {
                 case tasksList.status.complete:
-                    return _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.complete });
+                    if (filter.category == "all")
+                        return _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.complete });
+                    else
+                        return _.filter(todoDB.Tasks, function (t) { return t.status == tasksList.status.complete && t.category == filter.category });
+
                     break;
                 case tasksList.status.overdue:
-                    
+                    var today = new Date();
+                    dateFilter = Date.parse(new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear()).toUTCString())
+
+                    if (filter.category == "all")
+                        return _.filter(todoDB.Tasks, function (t) { return t.duedate != 0 && t.duedate < dateFilter });
+                    else
+                        return _.filter(todoDB.Tasks, function (t) { return t.duedate != 0 && t.duedate < dateFilter && t.category == filter.category });
                     break;
             }
             
@@ -126,7 +167,11 @@
                     var today = new Date();
                     dateFilter = Date.parse(new Date((today.getMonth() + 1) + "/" + today.getDay() + "/" + today.getFullYear()).toUTCString())
                     
-                    return _.filter(todoDB.Tasks, function (t) { return t.duedate == dateFilter });
+                    if(filter.category == "all")
+                        return _.filter(todoDB.Tasks, function (t) { return t.duedate == dateFilter });
+                    else
+                        return _.filter(todoDB.Tasks, function (t) { return t.duedate == dateFilter && t.category == filter.category });
+
                     break;
                 case tasksList.dateFilter.Tomorrow:
                     // to add 1 day
@@ -135,7 +180,11 @@
                     almostTomorrow.setDate(today.getDate() + 1);
                     dateFilter = app.Util.DatetoUTC(almostTomorrow);
 
-                    return _.filter(todoDB.Tasks, function (t) { return t.duedate == dateFilter });
+                    if (filter.category == "all")
+                        return _.filter(todoDB.Tasks, function (t) { return t.duedate == dateFilter });
+                    else
+                        return _.filter(todoDB.Tasks, function (t) { return t.duedate == dateFilter && t.category == filter.category });
+
                     break;
                 case tasksList.dateFilter.ThisWeek:
                     // to add 7 day
@@ -146,7 +195,12 @@
                     onlydateNoTime.setDate(today.getDate() + 7);
                     var SevendaysFromNow = app.Util.DatetoUTC(onlydateNoTime);
 
-                    var d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= todayUTC &&  t.duedate <= SevendaysFromNow});
+                    var d;
+                    if (filter.category == "all")
+                        d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= todayUTC && t.duedate <= SevendaysFromNow });
+                    else
+                        d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= todayUTC && t.duedate <= SevendaysFromNow && t.category == filter.category });
+
                     return _.sortBy(d, function (t) { return t.duedate }); //.reverse();
                     break;
                 case tasksList.dateFilter.NextWeek:
@@ -158,7 +212,12 @@
                     onlydateNoTime.setDate(onlydateNoTime.getDate() + 7);
                     var EndofNextWeek = app.Util.DatetoUTC(onlydateNoTime);
 
-                    var d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= EightdaysFromNow && t.duedate <= EndofNextWeek });
+                    var d;
+                    if (filter.category == "all")
+                        d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= EightdaysFromNow && t.duedate <= EndofNextWeek });
+                    else
+                        d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= EightdaysFromNow && t.duedate <= EndofNextWeek && t.category == filter.category });
+
                     return _.sortBy(d, function (t) { return t.duedate });
                     break;
                 case tasksList.dateFilter.ThisMonth:
@@ -169,7 +228,12 @@
                     onlydateNoTime.setDate(today.getDate() + 30);
                     var OneMonthFromNow = app.Util.DatetoUTC(onlydateNoTime);
 
-                    var d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= todayUTC && t.duedate <= OneMonthFromNow });
+                    var d;
+                    if (filter.category == "all")
+                        d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= todayUTC && t.duedate <= OneMonthFromNow });
+                    else
+                        d = _.filter(todoDB.Tasks, function (t) { return t.duedate >= todayUTC && t.duedate <= OneMonthFromNow && t.category == filter.category });
+
                     return _.sortBy(d, function (t) { return t.duedate });
                     break;
             }
@@ -224,12 +288,6 @@
                     return todoDB.Tasks[i];
                 }
             }
-        },
-        filterByTime: function () {
-
-        },
-        filterByCategory: function () {
-
         },
         render: function (callback) {
             RenderTasks(callback);

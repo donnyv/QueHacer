@@ -16,11 +16,12 @@ namespace QueHacer.Controllers
             return (new JavaScriptResult() { Script = AppLogic.GetTodoDBjson() });
         }
 
-        [HttpGet]
-        public ContentResult Task(string id)
-        {
-            return JsonUtilities.Result(false).JsonContentResult; 
-        }
+        //[HttpGet]
+        //public ActionResult Task(string id)
+        //{
+        //    var ret = AppLogic.FindTaskById2(id);
+        //    return View(ret.Item3); 
+        //}
 
         [HttpPost]
         public ContentResult AddTask(ToDodb.Tasks NewTask)

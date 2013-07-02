@@ -9,7 +9,9 @@
     <meta name="viewport" content="width=device-width" />
     <title>Que Hacer!</title>
     <link rel="stylesheet" type="text/css" href="Content/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="Content/css/common.css" />
     <link rel="stylesheet" type="text/css" href="Content/css/main.css" /> 
+    <link rel="stylesheet" type="text/css" href="Content/css/taskcard.css" />
     <!--[if IE]> <link type="text/css" rel="stylesheet" href="Content/css/main_IEonly.css" /> <![endif]-->
     <script type="text/javascript" src="Content/tmpl/main.htm"></script>
 </head>
@@ -20,7 +22,12 @@
         <div id="TopBar">
             <button id="AddTask" class="greenBtn" style="margin-left: -1px;">Add a New Task</button>
             <span id="nag"></span>
-            <span id="FilterTask" class="fakeURL">filter tasks</span>
+            <div style="position:relative;" >
+                <span id="FilterTask" class="fakeURL filterStyle">all</span>
+                <span class="filterStyle" style="margin-right:5px;">show</span>
+                <div id="CategoryList"></div>
+            </div>
+            
         </div>
         <div>
             <div id="Menu">
@@ -36,7 +43,6 @@
                 <ul id="StatusFilter">
                     <li data-type="completed"><a href="#"><span>Completed</span></a></li>
                     <li data-type="overdue"><a href="#"><span>Overdue</span></a></li>
-                    <li data-type="ignoring"><a href="#"><span>Ignoring</span></a></li>
                 </ul>
             </div>
             <div id="TasksContainer" class="BoxGlow_Grey">
@@ -59,6 +65,9 @@
         <div id="ntContent">
             <textarea id="ntTaskDesc" class="GlowTextbox" ></textarea>
             <button id="ntStatus" class="greenBtn2">completed</button>
+            
+            <button id="ntShare" class="blueBtn4">share</button>
+            <input id="ntShareURL" type="text" class="GlowTextbox"/>
         </div>
         <div id="ntBottom">
             <button id="ntSaveClose" class="greenBtn3">Save & Close</button>
